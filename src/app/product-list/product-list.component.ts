@@ -14,7 +14,9 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {}
 
   addToCart(product: Product) {
-    this.updateCart(product, 'add');
+    if(product.cartQuantity === 0){
+      this.updateCart(product, 'add');
+    }
     this.onAddToCart.next(product);
   }
 
