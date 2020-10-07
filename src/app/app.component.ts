@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Cart, Product} from "../types";
+import {Cart, CartItem, Product} from "../types";
 
 @Component({
   selector: 'app-root',
@@ -26,11 +26,31 @@ export class AppComponent {
   }
 
   addToCart(product: Product) {
-      
+    const { length } = this.cart.items;
+    const id = length + 1;
+    const found = this.cart.items.some(el => el.id === product.id);
+    if(!found) {
+      let cartItem: CartItem = {
+        id: product.id,
+        item: product.name,
+        quantity: product.cartQuantity
+      }  
+      this.cart.items.push(cartItem);
+    }
   }
 
   updateCart(product: Product) {
-      
+    let index = this.cart.items.findIndex((item) => item.id === product.id);
+    if (index === -1) {
+      let cartItem: CartItem = {
+        id: product.id,
+        item: product.name,
+        quantity: product.cartQuantity
+      }  
+      this.cart.items.push(cartItem);
+    } else {
+      this.cart.items[index].quantity = product.cartQuantity;
+    }
   }
 }
 

@@ -12,6 +12,23 @@ export class ProductListComponent implements OnInit {
   @Output() onQuantityUpdate: EventEmitter<Product> = new EventEmitter();
 
   ngOnInit() {}
+
+  addToCart(product: Product) {
+    this.updateCart(product, 'add');
+    this.onAddToCart.next(product);
+  }
+
+  updateCart(product: Product, operation: string) {
+    if(operation === 'add') {
+      product.cartQuantity = product.cartQuantity + 1; 
+      this.onQuantityUpdate.next(product);
+    } else {
+      if(product.cartQuantity > 0) {
+        product.cartQuantity = product.cartQuantity - 1; 
+        this.onQuantityUpdate.next(product);
+      }
+    }
+  }
 }
 
 
