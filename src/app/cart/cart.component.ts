@@ -7,13 +7,9 @@ import { ProductService } from '../services/product.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
   @Input() cart: Cart;
 
   constructor() {  }
-
-  ngOnInit() {
-    
-  }
 
 }
