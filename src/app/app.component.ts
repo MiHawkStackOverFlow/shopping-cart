@@ -49,7 +49,11 @@ export class AppComponent {
       }  
       this.cart.items.push(cartItem);
     } else {
-      this.cart.items[index].quantity = product.cartQuantity;
+      if(product.cartQuantity === 0) {
+        this.cart.items.splice(index, 1);
+      } else {
+        this.cart.items[index].quantity = product.cartQuantity;
+      }
     }
   }
 }
